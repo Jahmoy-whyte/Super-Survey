@@ -1,0 +1,34 @@
+.optionsdiv {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+.radioandtextbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 1;
+  gap: 5px;
+}
+.textbox {
+  border: none;
+  border-bottom: 0.5px solid #b3b3b3;
+  flex: 1;
+  height: 35px;
+  outline: none;
+}
+.textbox1 {
+  border: none;
+  border-bottom: 0.5px solid #b3b3b3;
+
+  height: 35px;
+  outline: none;
+}
+
+.btn {
+  border: none;
+  border-radius: 6px;
+  height: 35px;
+  outline: none;
+}

@@ -1,0 +1,19 @@
+.btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-height: 35px;
+  outline: none;
+  border-radius: 6px;
+  border: none;
+  font-weight: bold;
+  background-color: #5167f6;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btn:active {
+  transform: scale(0.95);
+}

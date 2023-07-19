@@ -1,0 +1,66 @@
+.maincontainer {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  background-color: #5167f6;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.containerdiv {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  max-width: 400px;
+  width: 100%;
+  border-radius: 6px;
+  margin-bottom: 30px;
+  min-height: 300px;
+  justify-content: center;
+  animation: an 0.5s;
+}
+
+.containerdiv > div {
+  display: flex;
+  flex-direction: column;
+  margin-left: 45px;
+  margin-right: 45px;
+}
+
+@keyframes an {
+  from {
+    opacity: 0;
+    transform: translate(0px, 80px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0px, 0px);
+  }
+}
+
+.containerdiv > div > h1 {
+  font-size: 1.6rem;
+}
+
+.containerdiv > div > div {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.containerdiv > div > div > p {
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.containerdiv > div > div > input {
+  height: 40px;
+  outline: none;
+  border-radius: 6px;
+  border: 0.5px solid #b3b3b3;
+  padding-left: 10px;
+}

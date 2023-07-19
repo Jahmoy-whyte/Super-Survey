@@ -1,0 +1,95 @@
+.backdrop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+}
+
+.container {
+  overflow: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  min-height: 350px;
+  max-width: 500px;
+  width: 100%;
+  border-radius: 6px;
+}
+.innercontainer {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.title > img {
+  width: 20px;
+  height: 20px;
+}
+.title > h1 {
+  font-size: 2rem;
+}
+.questioncontainer {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  gap: 10px;
+}
+
+.questiondiv {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.questiondivinput {
+  height: 35px;
+  outline: none;
+  border-radius: 6px;
+  border: 0.5px solid #b3b3b3;
+  padding-left: 10px;
+}
+.questiontypediv {
+  background-color: #5167f6;
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+  min-width: 180px;
+}
+.questiontypediv > ol {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.questiontypediv > ol > li:nth-child(1) {
+  padding-top: 0px;
+  padding-bottom: 5px;
+  justify-content: space-between;
+  cursor: default;
+}
+
+.questiontypediv > ol > li {
+  color: white;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 0.9rem;
+  gap: 5px;
+  cursor: pointer;
+}
