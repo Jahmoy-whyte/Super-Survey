@@ -1,27 +1,63 @@
-import { useState, useReducer, useContext } from "react";
-import { createSurvey } from "../../databaseFunctions/surveys_TableFunctions";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useState, useReducer, useContext, useEffect } from "react";
+import { deleteSurvey } from "../../databaseFunctions/surveys_TableFunctions";
+import { API_BASE_URL } from "../../databaseFunctions/helper/baseUrl";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { ACTIONS } from "./helper/reducerActions";
 import { SurveyInfoContext } from "../../context/context";
+import {
+  getQuestions,
+  insertQuestions,
+  deleteQuestions,
+  updateQuestions,
+} from "../../databaseFunctions/question_TableFunctions";
+import { checker } from "./helper/validateQuestion";
 const useBuildSurvey = () => {
+  const nav = useNavigate();
   const [surveyInfo, setSurveyInfo] = useContext(SurveyInfoContext);
   const initialState = {
-    questionType: "",
+    questionType: "shortAnswer",
     questionText: "",
     questionId: 1,
-    questions: [],
     isLoading: false,
     choices: [],
     choiceId: 1,
     showModel: false,
     buttonAction: "Save",
     id: "",
+    initialLoading: true,
+    showLinkModel: false,
+    linkButtonText: "Copy",
   };
 
   const reducer = (state, action) => {
     switch (action.type) {
+      case "showLinkModel":
+        return {
+          ...state,
+          showLinkModel: action.payload,
+        };
+      case "linkButtonText":
+        return {
+          ...state,
+          linkButtonText: action.payload,
+        };
+
+      case "loadingTrue":
+        return {
+          ...state,
+          isLoading: true,
+        };
+      case "loadingFalse":
+        return {
+          ...state,
+          isLoading: false,
+        };
+      case "initialLoading":
+        return {
+          ...state,
+          initialLoading: action.payload,
+        };
       case "questionType":
         return {
           ...state,
@@ -32,58 +68,18 @@ const useBuildSurvey = () => {
         return { ...state, questionText: action.payload };
       case "questionId":
         return { ...state, questionId: state.questionId + 1 };
-
-      case "deleteQuestion":
-        return {
-          ...state,
-          questions: state.questions.filter((data) => {
-            return data.id !== action.payload.id;
-          }),
-        };
-
-      case "editQuestion": {
-        const index = state.questions.findIndex(
-          (ques) => ques.id === action.payload.id
-        );
+      case "editQuestion":
         return {
           ...state,
           buttonAction: "Update",
-          questionType: state.questions[index].questionType,
-          questionText: state.questions[index].questionText,
-          choices: state.questions[index].choices,
-          id: state.questions[index].id,
+          questionType: action.payload.questionType,
+          questionText: action.payload.questionText,
+          choices: [...action.payload.choices],
+          id: action.payload.id,
           showModel: true,
-        };
-      }
-      case "addQuestion":
-        return {
-          ...state,
-          questionId: state.questionId + 1,
-          questions: [
-            ...state.questions,
-            {
-              id: state.questionId,
-              questionType: state.questionType,
-              questionText: state.questionText,
-              choices: state.choices,
-            },
-          ],
+          choiceId: action.payload.choices.length + 1,
         };
 
-      case "updateQuestion":
-        return {
-          ...state,
-          questions: state.questions.map((ques) => {
-            return ques.id == action.payload.id
-              ? {
-                  ...ques,
-                  questionType: state.questionType,
-                  questionText: state.questionText,
-                  choices: state.choices,
-                }
-              : ques;
-          }),
-        };
       case "showModel":
         return {
           ...state,
@@ -98,6 +94,7 @@ const useBuildSurvey = () => {
           questionType: "shortAnswer",
           questionText: "",
           id: "",
+          isLoading: false,
         };
       case "addChoice":
         return {
@@ -124,11 +121,157 @@ const useBuildSurvey = () => {
     }
   };
   const [state, dispatch] = useReducer(reducer, initialState);
-
+  const [questions, setQuestions] = useState([]);
   // ======================================== questtions state =========================
+  console.log(questions);
 
-  console.log(state);
-  return [state, dispatch, surveyInfo];
+  const copyLink = () => {
+    dispatch({ type: ACTIONS.LINKBUTTONTEXT, payload: "Copied" });
+    navigator.clipboard.writeText(`${API_BASE_URL}${surveyInfo.surveyId}`);
+    setTimeout(() => {
+      dispatch({ type: ACTIONS.LINKBUTTONTEXT, payload: "Copy" });
+    }, 500);
+  };
+
+  useEffect(() => {
+    // getting all questions for the form
+    const db_GetQuestions = async () => {
+      dispatch({ type: ACTIONS.INITIALLOADING, payload: true });
+      try {
+        const res = await getQuestions(surveyInfo.surveyId);
+        setQuestions(
+          res.map((row) => {
+            const choices = JSON.parse(row.question_options);
+            return {
+              id: row.question_id,
+              surveyId: row.survey_id,
+              questionType: row.question_type,
+              questionText: row.question_text,
+              choices: choices,
+            };
+          })
+        );
+      } catch (error) {
+        console.log(error);
+        toast.error(error.message);
+      }
+      dispatch({ type: ACTIONS.INITIALLOADING, payload: false });
+    };
+
+    db_GetQuestions();
+  }, []);
+
+  const db_AddQuestion = async () => {
+    const [bool, message] = checker(state);
+    if (!bool) return toast.warn(message);
+    dispatch({ type: ACTIONS.LOADING_TRUE });
+    try {
+      const res = await insertQuestions({
+        surveyId: surveyInfo.surveyId,
+        questionType: state.questionType,
+        questionText: state.questionText,
+        choices: state.choices,
+      });
+      setQuestions((prev) => [
+        ...prev,
+        {
+          id: res.insertId,
+          questionType: state.questionType,
+          questionText: state.questionText,
+          choices: state.choices,
+        },
+      ]);
+
+      dispatch({ type: ACTIONS.CLOSEMODEL });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const db_UpdateQuestion = async (id) => {
+    const [bool, message] = checker(state);
+    if (!bool) return toast.warn(message);
+    dispatch({ type: ACTIONS.LOADING_TRUE });
+    try {
+      const updateobj = {
+        questionType: state.questionType,
+        questionText: state.questionText,
+        choices: state.choices,
+      };
+      await updateQuestions(id, updateobj);
+      setQuestions(
+        questions.map((question) => {
+          return question.id == id
+            ? {
+                ...question,
+                ...updateobj,
+              }
+            : question;
+        })
+      );
+      dispatch({ type: ACTIONS.CLOSEMODEL });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const db_EditQuestion = async (id) => {
+    try {
+      const index = questions.findIndex((item) => item.id === id);
+      dispatch({
+        type: ACTIONS.EDIT_QUESTION,
+        payload: {
+          questionType: questions[index].questionType,
+          questionText: questions[index].questionText,
+          choices: [...questions[index].choices],
+          id: questions[index].id,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const db_DeleteQuestion = async (id) => {
+    let beforeDelete = [...questions];
+
+    try {
+      setQuestions(
+        questions.filter((data) => {
+          return data.id !== id;
+        })
+      );
+      await deleteQuestions(id);
+    } catch ({ error, message }) {
+      console.log(error);
+      setQuestions(beforeDelete);
+      toast.error(message);
+    }
+  };
+
+  const db_DeleteSurvey = async () => {
+    dispatch({ type: ACTIONS.INITIALLOADING, payload: true });
+    try {
+      await deleteSurvey(surveyInfo.surveyId);
+      nav("/home");
+    } catch ({ error, message }) {
+      console.log(error);
+      toast.error(message);
+    }
+    dispatch({ type: ACTIONS.INITIALLOADING, payload: false });
+  };
+  return [
+    state,
+    dispatch,
+    surveyInfo,
+    questions,
+    db_AddQuestion,
+    db_UpdateQuestion,
+    db_EditQuestion,
+    db_DeleteQuestion,
+    db_DeleteSurvey,
+    copyLink,
+  ];
 };
 
 export default useBuildSurvey;

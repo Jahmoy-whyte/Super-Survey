@@ -9,6 +9,7 @@ const Header = () => {
         <img src={logo} />
         <h1>Super Survey</h1>
       </div>
+
       <img src={user.picture} onClick={() => logout()} />
     </header>
   );

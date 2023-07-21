@@ -26,7 +26,7 @@ const QuestionTypeHander = ({ state, dispatch }) => {
         {state.choices.map((data) => (
           <div key={data.id} className={css.optionsdiv}>
             <div className={css.radioandtextbox}>
-              <input type="radio" className={css.radio} />
+              <input type="radio" className={css.radiobtn} disabled />
               <input
                 className={css.textbox}
                 type="text"
@@ -41,7 +41,7 @@ const QuestionTypeHander = ({ state, dispatch }) => {
               />
             </div>
             <img
-              className={css.closeimg}
+              className={css.deleteimg}
               src={smallClose}
               onClick={() =>
                 dispatch({ type: ACTIONS.DELETECHOICE, payload: data.id })

@@ -11,6 +11,9 @@
   flex: 1;
   gap: 5px;
 }
+.radiobtn {
+  accent-color: #5167f6;
+}
 .textbox {
   border: none;
   border-bottom: 0.5px solid #b3b3b3;
@@ -31,4 +34,8 @@
   border-radius: 6px;
   height: 35px;
   outline: none;
+  cursor: pointer;
+}
+.deleteimg {
+  cursor: pointer;
 }

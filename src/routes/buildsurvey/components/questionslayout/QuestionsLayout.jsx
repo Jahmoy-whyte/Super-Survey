@@ -1,7 +1,7 @@
 import css from "./CSS.module.css";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { ACTIONS } from "../../helper/reducerActions";
-const QuestionsLayout = ({ question, dispatch }) => {
+const QuestionsLayout = ({ question, db_EditQuestion, db_DeleteQuestion }) => {
   return (
     <>
       <div className={css.container}>
@@ -9,22 +9,14 @@ const QuestionsLayout = ({ question, dispatch }) => {
           <h3>{question.questionText}</h3>
           <span>
             <div
-              onClick={() =>
-                dispatch({
-                  type: ACTIONS.EDIT_QUESTION,
-                  payload: { id: question.id },
-                })
-              }
+              className={css.hovereffect}
+              onClick={() => db_EditQuestion(question.id)}
             >
               <AiOutlineEdit />
             </div>
             <div
-              onClick={() => {
-                dispatch({
-                  type: ACTIONS.DELETE_QUESTION,
-                  payload: { id: question.id },
-                });
-              }}
+              className={css.hovereffect}
+              onClick={() => db_DeleteQuestion(question.id)}
             >
               <AiOutlineDelete />
             </div>

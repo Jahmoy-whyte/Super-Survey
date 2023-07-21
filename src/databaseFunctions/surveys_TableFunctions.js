@@ -1,4 +1,5 @@
-const API_BASE_URL = "http://localhost:3000/";
+import { checkResponceReturn, checkResponce } from "./helper/CheckResponce";
+import { API_BASE_URL } from "./helper/baseUrl";
 
 export const createSurvey = async (userInfo) => {
   const response = await fetch(`${API_BASE_URL}surveys`, {
@@ -9,12 +10,16 @@ export const createSurvey = async (userInfo) => {
     body: JSON.stringify(userInfo),
   });
 
-  return await checkresponce(response, "error(1)");
+  return await checkResponceReturn(
+    response,
+    "Error creating survey please try again"
+  );
 };
 
-const checkresponce = async (response, errormsg) => {
-  if (!response.ok) throw new Error(errormsg);
-  const jsondata = await response.json();
-  if (jsondata.status === "nok") throw new Error(jsondata.res.code);
-  return jsondata.res;
+export const deleteSurvey = async (id) => {
+  const response = await fetch(`${API_BASE_URL}surveys/${id}`, {
+    method: "DELETE",
+  });
+
+  await checkResponce(response, "Error deleting survey please try again");
 };

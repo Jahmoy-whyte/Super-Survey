@@ -17,29 +17,33 @@ const Surveys = () => {
       <div className={css.maincontainer}>
         <div className={css.containerdiv}>
           <div className={css.innercontainer}>
-            <button
-              className={css.createnewbtn}
-              onClick={() => nav("/home/createsurvey")}
-            >
-              <AiOutlinePlus size={20} /> Create New Survey
-            </button>
-            <h1>Published Surveys:</h1>
+            <h1>Work Space:</h1>
+            <div className={css.buttonandsurveydiv}>
+              <button
+                className={css.createnewbtn}
+                onClick={() => nav("/home/createsurvey")}
+              >
+                <AiOutlinePlus size={20} />
 
-            {surveyData.data.length > 0 ? (
-              <div className={css.surveyscontainer}>
-                {surveyData.data.map((data) => (
-                  <Surveycards
-                    surveydata={data}
-                    key={data.survey_id}
-                    fn_navigate={fn_navigate}
-                  />
-                ))}
+                <p>Create New Survey </p>
+              </button>
+
+              <div className={css.surveydiv}>
+                {surveyData.data.length > 0 ? (
+                  surveyData.data.map((data) => (
+                    <Surveycards
+                      surveydata={data}
+                      key={data.survey_id}
+                      fn_navigate={fn_navigate}
+                    />
+                  ))
+                ) : (
+                  <div className={css.notfound}>
+                    <p>No Surveys Created</p>
+                  </div>
+                )}
               </div>
-            ) : (
-              <div className={css.notfound}>
-                <p>No Surveys Published</p>
-              </div>
-            )}
+            </div>
           </div>
         </div>
       </div>

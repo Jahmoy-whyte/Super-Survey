@@ -18,10 +18,17 @@
   flex-direction: row;
   gap: 10px;
   align-items: center;
-  border-bottom: 0.5px solid #b3b3b3;
+  cursor: pointer;
   padding-top: 5px;
   padding-bottom: 5px;
 }
+.toobarbtn:hover {
+  color: #5167f6;
+}
+.toobarbtn:active {
+  transform: scale(0.95);
+}
 .toobarbtn > p {
   font-size: 0.9rem;
+  font-weight: bold;
 }

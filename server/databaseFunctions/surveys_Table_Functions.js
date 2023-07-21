@@ -20,3 +20,10 @@ export const createSurvey = async (surveyInfo) => {
     [surveyInfo.surveyId, surveyInfo.userId, surveyInfo.surveyName]
   );
 };
+
+export const deleteAccountSurvey = async (surveyId) => {
+  const [result] = await conn.execute(
+    "DELETE FROM surveys WHERE survey_id =?",
+    [surveyId]
+  );
+};

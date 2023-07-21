@@ -11,4 +11,9 @@ export const ACTIONS = {
   UPDATE_QUESTION: "updateQuestion",
   ADD_QUESTION: "addQuestion",
   DELETE_QUESTION: "deleteQuestion",
+  LOADING_TRUE: "loadingTrue",
+  LOADING_FALSE: "loadingFalse",
+  INITIALLOADING: "initialLoading",
+  SHOWLINKMODEL: "showLinkModel",
+  LINKBUTTONTEXT: "linkButtonText",
 };

@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   border-bottom: 0.5px solid #b3b3b3;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 30px;
+  padding-bottom: 30px;
   gap: 15px;
 }
 .heading {
@@ -53,4 +53,7 @@
   outline: none;
   max-width: 400px;
   margin-right: 40px;
+}
+.hovereffect {
+  cursor: pointer;
 }

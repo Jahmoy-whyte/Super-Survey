@@ -3,30 +3,59 @@ import ToolBar from "./components/toolbar/ToolBar";
 import Addquestion from "./components/addquestion/Addquestion";
 import useBuildSurvey from "./useBuildSurvey";
 import QuestionsLayout from "./components/questionslayout/QuestionsLayout";
+import Loading from "../../components/loading/Loading";
+import CopyLinkModel from "./components/copylinkmodel/copylinkmodel";
 const BuildSurvey = () => {
-  const [state, dispatch, surveyInfo] = useBuildSurvey();
+  const [
+    state,
+    dispatch,
+    surveyInfo,
+    questions,
+    db_AddQuestion,
+    db_UpdateQuestion,
+    db_EditQuestion,
+    db_DeleteQuestion,
+    db_DeleteSurvey,
+    copyLink,
+  ] = useBuildSurvey();
   return (
     // questions,
     // questionFunctions,
     <>
-      <Addquestion state={state} dispatch={dispatch} />
+      <CopyLinkModel
+        state={state}
+        dispatch={dispatch}
+        surveyInfo={surveyInfo}
+        copyLink={copyLink}
+      />
+      <Addquestion
+        state={state}
+        dispatch={dispatch}
+        db_AddQuestion={db_AddQuestion}
+        db_UpdateQuestion={db_UpdateQuestion}
+      />
       <div className={css.maincontainer}>
         <div className={css.formandtoolbarcontainer}>
-          <ToolBar dispatch={dispatch} />
+          <ToolBar dispatch={dispatch} db_DeleteSurvey={db_DeleteSurvey} />
           <div className={css.surveyform}>
             <div className={css.title}>
               <h1>{surveyInfo.surveyName}</h1>
             </div>
 
-            {state.questions.map((data) => {
-              return (
-                <QuestionsLayout
-                  key={data.id}
-                  question={data}
-                  dispatch={dispatch}
-                />
-              );
-            })}
+            {state.initialLoading ? (
+              <Loading />
+            ) : (
+              questions.map((data) => {
+                return (
+                  <QuestionsLayout
+                    key={data.id}
+                    question={data}
+                    db_EditQuestion={db_EditQuestion}
+                    db_DeleteQuestion={db_DeleteQuestion}
+                  />
+                );
+              })
+            )}
           </div>
         </div>
       </div>

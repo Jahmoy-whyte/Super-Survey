@@ -53,7 +53,7 @@ const Routing = () => {
         },
         {
           path: "/home/createsurvey",
-          element: <BuildSurvey />,
+          element: <Createsurvey />,
         },
         {
           path: "/home/buildsurvey",

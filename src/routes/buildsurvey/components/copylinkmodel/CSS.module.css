@@ -1,0 +1,95 @@
+.backdrop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  overflow: hidden;
+  overflow-y: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  animation: backdropshow 0.4s;
+}
+
+@keyframes backdropshow {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.container {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  min-height: 150px;
+  max-width: 500px;
+  width: 100%;
+  border-radius: 6px;
+  animation: containershow 0.4s;
+}
+
+@keyframes containershow {
+  from {
+    transform: scale(0.9);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+.titlediv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.titlediv > h1 {
+  font-size: 2rem;
+}
+
+.titlediv > img {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.inncontainer {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+.linkdiv {
+  display: flex;
+  flex-direction: row;
+  padding: 15px;
+  border-radius: 6px;
+  border: 0.5px solid #b3b3b3;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.linkdiv > p {
+  font-size: 0.9rem;
+}
+
+.linkdiv > button {
+  outline: none;
+  border-radius: 6px;
+  border: none;
+  background-color: #5167f6;
+  color: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.linkdiv > button:active {
+  transform: scale(0.95);
+}

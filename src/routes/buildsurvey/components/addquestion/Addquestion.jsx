@@ -7,13 +7,28 @@ import Button from "../../../../components/button/Button";
 import closelarge from "../../../../assets/images/close2.svg";
 import { ACTIONS } from "../../helper/reducerActions";
 import QuestionTypeHander from "../questiontypehander/QuestionTypeHander";
-const Addquestion = ({ state, dispatch }) => {
+
+import dropdownarrow from "../../../../assets/images/dropdownarrow.svg";
+
+import longanswer from "../../../../assets/images/longanswer.svg";
+import shortanswer from "../../../../assets/images/shortanswer.svg";
+import multiplechoice from "../../../../assets/images/multiplechoice.svg";
+const Addquestion = ({
+  state,
+  dispatch,
+  db_AddQuestion,
+  db_UpdateQuestion,
+}) => {
   return (
     <>
       {state.showModel ? (
         <div
           className={css.backdrop}
-          onClick={() => dispatch({ type: ACTIONS.CLOSEMODEL })}
+          onClick={() => {
+            if (!state.isLoading) {
+              dispatch({ type: ACTIONS.CLOSEMODEL });
+            }
+          }}
         >
           <div className={css.container} onClick={(e) => e.stopPropagation()}>
             <div className={css.innercontainer}>
@@ -21,7 +36,11 @@ const Addquestion = ({ state, dispatch }) => {
                 <h1>Question</h1>
                 <img
                   src={closelarge}
-                  onClick={() => dispatch({ type: ACTIONS.CLOSEMODEL })}
+                  onClick={() => {
+                    if (!state.isLoading) {
+                      dispatch({ type: ACTIONS.CLOSEMODEL });
+                    }
+                  }}
                 />
               </div>
 
@@ -41,23 +60,15 @@ const Addquestion = ({ state, dispatch }) => {
 
                   <QuestionTypeHander state={state} dispatch={dispatch} />
                   <Button
+                    isLoading={state.isLoading}
                     text={state.buttonAction}
                     width={100}
-                    topbBottomMargin={10}
                     func={() => {
                       if (state.buttonAction === "Save") {
-                        dispatch({
-                          type: ACTIONS.ADD_QUESTION,
-                        });
+                        db_AddQuestion();
                       } else {
-                        dispatch({
-                          type: ACTIONS.UPDATE_QUESTION,
-                          payload: { id: state.id },
-                        });
+                        db_UpdateQuestion(state.id);
                       }
-                      dispatch({
-                        type: ACTIONS.CLOSEMODEL,
-                      });
                     }}
                   />
                 </div>
@@ -65,7 +76,6 @@ const Addquestion = ({ state, dispatch }) => {
                   <ol>
                     <li>
                       <b> Question Type</b>
-                      <IoIosArrowDown />
                     </li>
                     <li
                       onClick={() =>
@@ -75,7 +85,8 @@ const Addquestion = ({ state, dispatch }) => {
                         })
                       }
                     >
-                      <MdShortText /> Short answer
+                      <img src={shortanswer} />
+                      Short answer
                     </li>
                     <li
                       onClick={() =>
@@ -85,7 +96,7 @@ const Addquestion = ({ state, dispatch }) => {
                         })
                       }
                     >
-                      <BsTextLeft /> Long answer
+                      <img src={longanswer} /> Long answer
                     </li>
                     <li
                       onClick={() =>
@@ -95,7 +106,7 @@ const Addquestion = ({ state, dispatch }) => {
                         })
                       }
                     >
-                      <SlOptionsVertical /> Multiple choice
+                      <img src={multiplechoice} /> Multiple choice
                     </li>
                   </ol>
                 </div>
