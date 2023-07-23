@@ -17,6 +17,7 @@ const BuildSurvey = () => {
     db_DeleteQuestion,
     db_DeleteSurvey,
     copyLink,
+    navToResponces,
   ] = useBuildSurvey();
   return (
     // questions,
@@ -36,7 +37,11 @@ const BuildSurvey = () => {
       />
       <div className={css.maincontainer}>
         <div className={css.formandtoolbarcontainer}>
-          <ToolBar dispatch={dispatch} db_DeleteSurvey={db_DeleteSurvey} />
+          <ToolBar
+            dispatch={dispatch}
+            db_DeleteSurvey={db_DeleteSurvey}
+            navToResponces={navToResponces}
+          />
           <div className={css.surveyform}>
             <div className={css.title}>
               <h1>{surveyInfo.surveyName}</h1>

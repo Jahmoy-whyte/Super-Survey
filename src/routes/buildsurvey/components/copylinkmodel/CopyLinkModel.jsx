@@ -1,6 +1,7 @@
 import css from "./CSS.module.css";
 import closelarge from "../../../../assets/images/close2.svg";
 import { ACTIONS } from "../../helper/reducerActions";
+import { API_BASE_URL } from "../../../../databaseFunctions/helper/baseUrl";
 const CopyLinkModel = ({ state, dispatch, surveyInfo, copyLink }) => {
   return (
     <>
@@ -24,7 +25,9 @@ const CopyLinkModel = ({ state, dispatch, surveyInfo, copyLink }) => {
               </div>
 
               <div className={css.linkdiv}>
-                <p>http://localhost:5173/{surveyInfo.surveyId}</p>
+                <p>
+                  {API_BASE_URL}/surveyform/{surveyInfo.surveyId}
+                </p>
                 <button onClick={() => copyLink()}>
                   {state.linkButtonText}
                 </button>

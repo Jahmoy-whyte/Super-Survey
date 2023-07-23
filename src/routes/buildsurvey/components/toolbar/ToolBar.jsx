@@ -1,8 +1,9 @@
 import css from "./CSS.module.css";
 import { AiOutlinePlus, AiOutlineDelete } from "react-icons/ai";
 import { FiClipboard } from "react-icons/fi";
+import { VscGraph } from "react-icons/vsc";
 import { ACTIONS } from "../../helper/reducerActions";
-const ToolBar = ({ dispatch, db_DeleteSurvey }) => {
+const ToolBar = ({ dispatch, db_DeleteSurvey, navToResponces }) => {
   return (
     <div className={css.toobar}>
       <div
@@ -10,7 +11,7 @@ const ToolBar = ({ dispatch, db_DeleteSurvey }) => {
         onClick={() => dispatch({ type: ACTIONS.SHOWMODEL, payload: true })}
       >
         <AiOutlinePlus />
-        <p>Add Question</p>
+        <p>AddQuestion</p>
       </div>
 
       <div
@@ -25,6 +26,11 @@ const ToolBar = ({ dispatch, db_DeleteSurvey }) => {
         <AiOutlineDelete />
         <p>Delete</p>
       </div>
+
+      <button className={css.toobarbtn2} onClick={() => navToResponces()}>
+        <VscGraph />
+        <p>Responces</p>
+      </button>
     </div>
   );
 };

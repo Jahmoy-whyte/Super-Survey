@@ -10,7 +10,7 @@ const Surveys = () => {
   const [surveyData, fn_navigate] = useSurvey();
 
   if (surveyData.isloading) {
-    return <Loading />;
+    return <Loading secondary={"white"} primaryColors={"white"} />;
   }
   return (
     <>

@@ -27,3 +27,26 @@ export const deleteAccountSurvey = async (surveyId) => {
     [surveyId]
   );
 };
+/*
+          id: question.question_id,
+            choices: choices,
+            questionText: question.question_text,
+            questionType: question.question_type,
+            surveyId: question.survey_id,
+            surveyName: question.survey_name,
+            answer: "",
+*/
+export const getSurveyForm = async (surveyId) => {
+  const [result] = await conn.execute(
+    `SELECT
+      questions.question_id AS id, 
+      questions.survey_id AS surveyId, 
+      questions.question_text AS questionText, 
+      questions.question_type AS questionType, 
+      questions.question_options AS choices, 
+      surveys.survey_name AS surveyName 
+      FROM  surveys LEFT JOIN  questions ON surveys.survey_id = questions.survey_id  WHERE surveys.survey_id =?`,
+    [surveyId]
+  );
+  return result;
+};

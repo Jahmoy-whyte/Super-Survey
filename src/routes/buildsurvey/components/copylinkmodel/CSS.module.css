@@ -50,12 +50,12 @@
   align-items: center;
 }
 .titlediv > h1 {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .titlediv > img {
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   cursor: pointer;
 }
 

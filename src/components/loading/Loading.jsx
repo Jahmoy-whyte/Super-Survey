@@ -1,9 +1,12 @@
 import { ProgressBar } from "react-loader-spinner";
 import css from "./CSS.module.css";
-const Loading = () => {
+const Loading = ({ primaryColors, secondary }) => {
   return (
     <div className={css.container}>
-      <ProgressBar barColor="#5167F6" borderColor="#3F59FE" />
+      <ProgressBar
+        barColor={primaryColors ? primaryColors : "#5167F6"}
+        borderColor={secondary ? secondary : "#3F59FE"}
+      />
     </div>
   );
 };

@@ -1,0 +1,32 @@
+.maincontainer {
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+  border: 0.5px solid black;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  cursor: pointer;
+}
+.maincontainer:active {
+  transform: scale(0.95);
+}
+
+.headingcontainer {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.headingcontainer > h3 {
+  font-size: 1rem;
+  color: black;
+}
+.answersdiv {
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+}

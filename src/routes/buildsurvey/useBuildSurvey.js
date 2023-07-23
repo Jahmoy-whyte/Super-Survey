@@ -118,6 +118,8 @@ const useBuildSurvey = () => {
             return data.id !== action.payload;
           }),
         };
+      default:
+        return state;
     }
   };
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -127,7 +129,9 @@ const useBuildSurvey = () => {
 
   const copyLink = () => {
     dispatch({ type: ACTIONS.LINKBUTTONTEXT, payload: "Copied" });
-    navigator.clipboard.writeText(`${API_BASE_URL}${surveyInfo.surveyId}`);
+    navigator.clipboard.writeText(
+      `${"http://localhost:5173/"}surveyform/${surveyInfo.surveyId}`
+    );
     setTimeout(() => {
       dispatch({ type: ACTIONS.LINKBUTTONTEXT, payload: "Copy" });
     }, 500);
@@ -141,12 +145,9 @@ const useBuildSurvey = () => {
         const res = await getQuestions(surveyInfo.surveyId);
         setQuestions(
           res.map((row) => {
-            const choices = JSON.parse(row.question_options);
+            const choices = JSON.parse(row.choices);
             return {
-              id: row.question_id,
-              surveyId: row.survey_id,
-              questionType: row.question_type,
-              questionText: row.question_text,
+              ...row,
               choices: choices,
             };
           })
@@ -260,6 +261,10 @@ const useBuildSurvey = () => {
     }
     dispatch({ type: ACTIONS.INITIALLOADING, payload: false });
   };
+
+  const navToResponces = () => {
+    nav("/home/surveyresponces");
+  };
   return [
     state,
     dispatch,
@@ -271,6 +276,7 @@ const useBuildSurvey = () => {
     db_DeleteQuestion,
     db_DeleteSurvey,
     copyLink,
+    navToResponces,
   ];
 };
 

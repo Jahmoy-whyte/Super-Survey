@@ -5,16 +5,30 @@ const conn = mysql2.createPool({
   user: "root",
   database: "surveydb",
 });
-
-export const getSurveyQuestions = async (surveyId) => {
-  const [result] = await conn.execute(
-    "SELECT * FROM questions WHERE survey_id =?",
+/*
+question_id AS id,
+ survey_id AS surveyId, 
+ question_text AS questionText, 
+ question_type AS questionType,
+  question_options AS choices, 
+  "SELECT survey_id  FROM questions WHERE survey_id=?",
+*/
+export const getQuestions = async (surveyId) => {
+  const [result] = await conn.query(
+    `SELECT 
+    question_id AS id,
+    survey_id AS surveyId, 
+    question_text AS questionText, 
+    question_type AS questionType,
+    question_options AS choices
+    FROM questions WHERE survey_id=?`,
     [surveyId]
   );
+
   return result;
 };
 
-export const insertSurveyQuestions = async (surveyQuestions) => {
+export const insertQuestions = async (surveyQuestions) => {
   const options = JSON.stringify(surveyQuestions.choices);
   const [result] = await conn.execute(
     "INSERT INTO questions (survey_id, question_text, question_type, question_options) VALUES(?,?,?,?)",
@@ -29,7 +43,7 @@ export const insertSurveyQuestions = async (surveyQuestions) => {
   return result;
 };
 
-export const updateSurveyQuestions = async (id, surveyQuestions) => {
+export const updateQuestions = async (id, surveyQuestions) => {
   const options = JSON.stringify(surveyQuestions.choices);
   const [result] = await conn.execute(
     "UPDATE questions SET question_text=?, question_type=?, question_options=? WHERE question_id=?",
@@ -37,7 +51,7 @@ export const updateSurveyQuestions = async (id, surveyQuestions) => {
   );
 };
 
-export const deleteSurveyQuestions = async (id) => {
+export const deleteQuestions = async (id) => {
   const result = await conn.execute(
     "DELETE FROM questions WHERE question_id=?",
     [id]

@@ -6,13 +6,19 @@ import {
   getAccountSurveys,
   createSurvey,
   deleteAccountSurvey,
+  getSurveyForm,
 } from "./databaseFunctions/surveys_Table_Functions.js";
 import {
-  getSurveyQuestions,
-  insertSurveyQuestions,
-  deleteSurveyQuestions,
-  updateSurveyQuestions,
+  deleteQuestions,
+  getQuestions,
+  insertQuestions,
+  updateQuestions,
 } from "./databaseFunctions/question_Table_Functions.js";
+
+import {
+  getResponces,
+  insertResponce,
+} from "./databaseFunctions/responce_Table_Functions.js";
 import { randomUUID } from "crypto";
 const app = express();
 app.use(express.json());
@@ -74,12 +80,26 @@ app.delete("/surveys/:id", async (req, res) => {
   }
 });
 
+app.get("/surveys/form/:id", async (req, res) => {
+  try {
+    const surveyId = req.params.id;
+    const result = await getSurveyForm(surveyId);
+    res.json({ res: result, status: "ok" });
+  } catch (error) {
+    console.error("Database error:", error);
+    res.status(500).json({
+      res: "An unexpected error occurred getting survey form",
+      status: "nok",
+    });
+  }
+});
+
 // =========================== Questions end points =========================
 
 app.get("/questions/:id", async (req, res) => {
   try {
     const surveyId = req.params.id;
-    const result = await getSurveyQuestions(surveyId);
+    const result = await getQuestions(surveyId);
     res.json({ res: result, status: "ok" });
   } catch (error) {
     console.error("Database error:", error);
@@ -94,7 +114,7 @@ app.post("/questions", async (req, res) => {
   try {
     console.log(req.body);
     const surveyQuestions = req.body;
-    const result = await insertSurveyQuestions(surveyQuestions);
+    const result = await insertQuestions(surveyQuestions);
     res.json({ res: result, status: "ok" });
   } catch (error) {
     console.error("Database error:", error);
@@ -109,7 +129,7 @@ app.put("/questions/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const surveyQuestions = req.body;
-    await updateSurveyQuestions(id, surveyQuestions);
+    await updateQuestions(id, surveyQuestions);
     res.json({ res: "success", status: "ok" });
   } catch (error) {
     console.error("Database error:", error);
@@ -123,12 +143,43 @@ app.put("/questions/:id", async (req, res) => {
 app.delete("/questions/:id", async (req, res) => {
   try {
     const id = req.params.id;
-    await deleteSurveyQuestions(id);
+    await deleteQuestions(id);
     res.json({ res: "success", status: "ok" });
   } catch (error) {
     console.error("Database error:", error);
     res.status(500).json({
       res: "An unexpected error occurred deleting survey questions",
+      status: "nok",
+    });
+  }
+});
+
+// =========================== responce end points =========================
+
+app.post("/responces", async (req, res) => {
+  try {
+    const responceId = randomUUID();
+    const { surveyId, answers, email } = req.body;
+    await insertResponce(responceId, surveyId, answers, email);
+    res.json({ res: "success", status: "ok" });
+  } catch (error) {
+    console.error("Database error:", error);
+    res.status(500).json({
+      res: "An unexpected error occurred inserting responce",
+      status: "nok",
+    });
+  }
+});
+app.get("/responces/:id", async (req, res) => {
+  try {
+    console.log(req.params);
+    const { id } = req.params;
+    const result = await getResponces(id);
+    res.json({ res: result, status: "ok" });
+  } catch (error) {
+    console.error("Database error:", error);
+    res.status(500).json({
+      res: "An unexpected error occurred getting responce",
       status: "nok",
     });
   }

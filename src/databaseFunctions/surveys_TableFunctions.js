@@ -23,3 +23,11 @@ export const deleteSurvey = async (id) => {
 
   await checkResponce(response, "Error deleting survey please try again");
 };
+
+export const getSurveyForm = async (surveyId) => {
+  const response = await fetch(`${API_BASE_URL}surveys/form/${surveyId}`);
+  return await checkResponceReturn(
+    response,
+    "Error getting survey form please reload and try again"
+  );
+};

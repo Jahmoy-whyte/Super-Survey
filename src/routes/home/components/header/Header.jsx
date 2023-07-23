@@ -1,17 +1,43 @@
 import css from "./CSS.module.css";
 import logo from "../../../../assets/images/logo.svg";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useState } from "react";
+import { FiLogOut } from "react-icons/fi";
+import { AiOutlineMail } from "react-icons/ai";
 const Header = () => {
   const { user, logout } = useAuth0();
+  const [show, setShow] = useState(false);
   return (
-    <header className={css.heading_css}>
-      <div>
-        <img src={logo} />
-        <h1>Super Survey</h1>
-      </div>
+    <>
+      {show ? (
+        <div className={css.menubackdrop} onClick={() => setShow(!show)}></div>
+      ) : null}
 
-      <img src={user.picture} onClick={() => logout()} />
-    </header>
+      <header className={css.heading_css}>
+        <div className={css.leftdiv}>
+          <img src={logo} />
+          <h1>Super Survey</h1>
+        </div>
+        <div className={css.accountmenudiv}>
+          <img src={user?.picture} onClick={() => setShow(!show)} />
+          {show ? (
+            <div className={css.accountmenu}>
+              <div className={css.accountinfodiv}>
+                <img src={user?.picture} />
+                <div className={css.accountinfo}>
+                  <p>{user.name}</p>
+                  <p>{user.email}</p>
+                </div>
+              </div>
+              <button className={css.logoutbtn} onClick={() => logout()}>
+                <FiLogOut />
+                Log Out
+              </button>
+            </div>
+          ) : null}
+        </div>
+      </header>
+    </>
   );
 };
 //      <p>{JSON.stringify(user)}</p>

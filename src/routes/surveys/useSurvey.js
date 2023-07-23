@@ -4,6 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { SurveyInfoContext } from "../../context/context";
+
 const useSurvey = () => {
   const nav = useNavigate();
   const [surveyInfo, setSurveyInfo] = useContext(SurveyInfoContext);

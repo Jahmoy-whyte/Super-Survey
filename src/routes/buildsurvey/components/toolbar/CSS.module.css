@@ -6,6 +6,8 @@
   min-height: 60px;
   border-radius: 6px;
   background-color: white;
+  padding-bottom: 5px;
+  padding-top: 5px;
   padding-left: 15px;
   padding-right: 15px;
   flex-wrap: wrap;
@@ -31,4 +33,21 @@
 .toobarbtn > p {
   font-size: 0.9rem;
   font-weight: bold;
+}
+
+.toobarbtn2 {
+  max-width: 200px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+  cursor: pointer;
+  background-color: #5167f6;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+}
+.toobarbtn2:active {
+  transform: scale(0.95);
 }
