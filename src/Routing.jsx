@@ -18,33 +18,14 @@ import { useState } from "react";
 import SurveyForm from "./routes/surveyform/SurveyForm";
 import SurveySubmitted from "./routes/surveysubmitted/SurveySubmitted";
 import SurveyResponces from "./routes/surveyresponces/SurveyResponces";
+import ProtectedRoutes from "./ProtectedRoutes";
 const Routing = () => {
-  const { isLoading, isAuthenticated, loginWithRedirect } = useAuth0();
   const [surveyInfo, setSurveyInfo] = useState({
     surveyName: null,
     surveyId: null,
   });
 
-  const Temproute = () => {
-    if (isLoading) {
-      return <div>loading</div>;
-    }
-
-    if (!isLoading) {
-      if (isAuthenticated) {
-        return <Navigate to={"/home"} />;
-      } else {
-        loginWithRedirect();
-        return <div></div>;
-      }
-    }
-  };
-
   const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Temproute />,
-    },
     {
       path: "/surveyform/:id",
       element: <SurveyForm />,
@@ -54,11 +35,11 @@ const Routing = () => {
       element: <SurveySubmitted />,
     },
     {
-      path: "/home",
-      element: <Home />,
+      path: "/",
+      element: <ProtectedRoutes Route={Home} />,
       children: [
         {
-          path: "/home/",
+          path: "/",
           element: <Surveys />,
         },
         {

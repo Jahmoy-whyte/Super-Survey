@@ -4,9 +4,11 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useState } from "react";
 import { FiLogOut } from "react-icons/fi";
 import { AiOutlineMail } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 const Header = () => {
   const { user, logout } = useAuth0();
   const [show, setShow] = useState(false);
+  const nav = useNavigate();
   return (
     <>
       {show ? (
@@ -14,7 +16,7 @@ const Header = () => {
       ) : null}
 
       <header className={css.heading_css}>
-        <div className={css.leftdiv}>
+        <div className={css.leftdiv} onClick={() => nav("/")}>
           <img src={logo} />
           <h1>Super Survey</h1>
         </div>

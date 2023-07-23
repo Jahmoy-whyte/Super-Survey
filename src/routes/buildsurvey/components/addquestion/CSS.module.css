@@ -14,6 +14,7 @@
   padding-left: 10px;
   padding-right: 10px;
   animation: backdropshow 0.4s;
+  z-index: 3;
 }
 
 @keyframes backdropshow {
@@ -132,4 +133,26 @@
 }
 .questiontypediv > ol > li:active {
   transform: scale(0.95);
+}
+
+@media screen and (max-width: 600px) {
+  .backdrop {
+    justify-content: flex-start;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .questioncontainer {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .backdrop {
+    justify-content: flex-start;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .questioncontainer {
+    flex-direction: column;
+  }
 }

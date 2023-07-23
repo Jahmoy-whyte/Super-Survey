@@ -76,6 +76,7 @@
 }
 .accountinfodiv > img {
   border-radius: 30px;
+  background-color: #ebebeb;
   width: 30px;
   height: 30px;
 }
@@ -118,4 +119,11 @@
   width: 100%;
   top: 0px;
   position: fixed;
+}
+
+@media screen and (max-width: 600px) {
+  .leftdiv > h1 {
+    color: white;
+    font-size: 1.5rem;
+  }
 }

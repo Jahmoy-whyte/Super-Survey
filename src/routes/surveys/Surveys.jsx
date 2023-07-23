@@ -11,7 +11,14 @@ const Surveys = () => {
 
   if (surveyData.isloading) {
     return <Loading secondary={"white"} primaryColors={"white"} />;
+  } else if (surveyData.error) {
+    return (
+      <div>
+        <p>error </p>
+      </div>
+    );
   }
+
   return (
     <>
       <div className={css.maincontainer}>

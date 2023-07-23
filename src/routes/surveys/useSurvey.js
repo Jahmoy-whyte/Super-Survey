@@ -8,7 +8,11 @@ import { SurveyInfoContext } from "../../context/context";
 const useSurvey = () => {
   const nav = useNavigate();
   const [surveyInfo, setSurveyInfo] = useContext(SurveyInfoContext);
-  const [surveyData, setsurveyData] = useState({ isloading: true, data: [] });
+  const [surveyData, setsurveyData] = useState({
+    isloading: true,
+    data: [],
+    error: false,
+  });
   const { user } = useAuth0();
   useEffect(() => {
     const fn_GetUserInfo = async () => {
@@ -20,6 +24,7 @@ const useSurvey = () => {
       } catch (error) {
         console.log("=========================");
         toast.error(error.message);
+        setsurveyData((prev) => ({ ...prev, isloading: false, error: true }));
         console.log(error);
       }
     };
