@@ -1,10 +1,4 @@
-import mysql from "mysql2/promise";
-
-const conn = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  database: "surveydb",
-});
+import conn from "../helper/sqlconnection.js";
 
 export const insertResponce = async (responceId, surveyId, answers, email) => {
   const [result1] = await conn.execute(

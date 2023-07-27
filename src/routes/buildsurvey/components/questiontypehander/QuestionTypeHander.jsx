@@ -1,6 +1,7 @@
 import css from "./CSS.module.css";
 import smallClose from "../../../../assets/images/closeSmall.svg";
 import { ACTIONS } from "../../helper/reducerActions";
+import { memo } from "react";
 const QuestionTypeHander = ({ state, dispatch }) => {
   if (state.questionType == "shortAnswer") {
     return (
@@ -70,4 +71,4 @@ const QuestionTypeHander = ({ state, dispatch }) => {
   }
 };
 
-export default QuestionTypeHander;
+export default memo(QuestionTypeHander);

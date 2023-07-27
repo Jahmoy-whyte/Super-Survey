@@ -5,6 +5,7 @@ import useBuildSurvey from "./useBuildSurvey";
 import QuestionsLayout from "./components/questionslayout/QuestionsLayout";
 import Loading from "../../components/loading/Loading";
 import CopyLinkModel from "./components/copylinkmodel/copylinkmodel";
+import DeleteSurveyModel from "./components/deletesurveymodel/DeleteSurveyModel";
 const BuildSurvey = () => {
   const [
     state,
@@ -23,6 +24,11 @@ const BuildSurvey = () => {
     // questions,
     // questionFunctions,
     <>
+      <DeleteSurveyModel
+        db_DeleteSurvey={db_DeleteSurvey}
+        dispatch={dispatch}
+        state={state}
+      />
       <CopyLinkModel
         state={state}
         dispatch={dispatch}

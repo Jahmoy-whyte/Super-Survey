@@ -16,4 +16,5 @@ export const ACTIONS = {
   INITIALLOADING: "initialLoading",
   SHOWLINKMODEL: "showLinkModel",
   LINKBUTTONTEXT: "linkButtonText",
+  SHOWDELETESURVEYMODEL: "showDeleteSurveyModel",
 };

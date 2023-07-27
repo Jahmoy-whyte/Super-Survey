@@ -3,7 +3,7 @@ import { AiOutlinePlus, AiOutlineDelete } from "react-icons/ai";
 import { FiClipboard } from "react-icons/fi";
 import { VscGraph } from "react-icons/vsc";
 import { ACTIONS } from "../../helper/reducerActions";
-const ToolBar = ({ dispatch, db_DeleteSurvey, navToResponces }) => {
+const ToolBar = ({ dispatch, navToResponces }) => {
   return (
     <div className={css.toobar}>
       <div
@@ -22,7 +22,12 @@ const ToolBar = ({ dispatch, db_DeleteSurvey, navToResponces }) => {
         <p>Share</p>
       </div>
 
-      <div className={css.toobarbtn} onClick={() => db_DeleteSurvey()}>
+      <div
+        className={css.toobarbtn}
+        onClick={() =>
+          dispatch({ type: ACTIONS.SHOWDELETESURVEYMODEL, payload: true })
+        }
+      >
         <AiOutlineDelete />
         <p>Delete</p>
       </div>

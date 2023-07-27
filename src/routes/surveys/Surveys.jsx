@@ -46,7 +46,7 @@ const Surveys = () => {
                   ))
                 ) : (
                   <div className={css.notfound}>
-                    <p>No Surveys Created</p>
+                    <img src={nosurveys} />
                   </div>
                 )}
               </div>

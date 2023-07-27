@@ -14,13 +14,13 @@ const useSurvey = () => {
     error: false,
   });
   const { user } = useAuth0();
+
   useEffect(() => {
     const fn_GetUserInfo = async () => {
       try {
         const userInfo = { email: user.email, userId: user.sub };
         const res = await getUserInfo(userInfo);
         setsurveyData({ isloading: false, data: res });
-        console.log(res);
       } catch (error) {
         console.log("=========================");
         toast.error(error.message);

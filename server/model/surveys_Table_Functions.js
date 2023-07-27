@@ -1,10 +1,4 @@
-import mysql from "mysql2/promise";
-
-const conn = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  database: "surveydb",
-});
+import conn from "../helper/sqlconnection.js";
 
 export const getAccountSurveys = async (userInfo) => {
   const [result] = await conn.execute(
@@ -27,15 +21,7 @@ export const deleteAccountSurvey = async (surveyId) => {
     [surveyId]
   );
 };
-/*
-          id: question.question_id,
-            choices: choices,
-            questionText: question.question_text,
-            questionType: question.question_type,
-            surveyId: question.survey_id,
-            surveyName: question.survey_name,
-            answer: "",
-*/
+
 export const getSurveyForm = async (surveyId) => {
   const [result] = await conn.execute(
     `SELECT

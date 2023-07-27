@@ -1,18 +1,5 @@
-import mysql2 from "mysql2/promise";
+import conn from "../helper/sqlconnection.js";
 
-const conn = mysql2.createPool({
-  host: "localhost",
-  user: "root",
-  database: "surveydb",
-});
-/*
-question_id AS id,
- survey_id AS surveyId, 
- question_text AS questionText, 
- question_type AS questionType,
-  question_options AS choices, 
-  "SELECT survey_id  FROM questions WHERE survey_id=?",
-*/
 export const getQuestions = async (surveyId) => {
   const [result] = await conn.query(
     `SELECT 

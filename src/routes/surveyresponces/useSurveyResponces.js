@@ -129,7 +129,6 @@ const useSurveyResponces = () => {
     dbGetQuestions();
   }, []);
 
-  console.log(state);
   return [state, dispatch, surveyInfo, dbGetResponces];
 };
 

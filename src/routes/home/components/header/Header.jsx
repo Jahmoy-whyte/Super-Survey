@@ -3,7 +3,6 @@ import logo from "../../../../assets/images/logo.svg";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState } from "react";
 import { FiLogOut } from "react-icons/fi";
-import { AiOutlineMail } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 const Header = () => {
   const { user, logout } = useAuth0();

@@ -2,17 +2,12 @@ import css from "./CSS.module.css";
 import { MdShortText } from "react-icons/md";
 import { BsTextLeft } from "react-icons/bs";
 import { SlOptionsVertical } from "react-icons/sl";
-import { IoIosArrowDown } from "react-icons/io";
+
 import Button from "../../../../components/button/Button";
 import closelarge from "../../../../assets/images/close2.svg";
 import { ACTIONS } from "../../helper/reducerActions";
 import QuestionTypeHander from "../questiontypehander/QuestionTypeHander";
 
-import dropdownarrow from "../../../../assets/images/dropdownarrow.svg";
-
-import longanswer from "../../../../assets/images/longanswer.svg";
-import shortanswer from "../../../../assets/images/shortanswer.svg";
-import multiplechoice from "../../../../assets/images/multiplechoice.svg";
 const Addquestion = ({
   state,
   dispatch,
@@ -85,7 +80,7 @@ const Addquestion = ({
                         })
                       }
                     >
-                      <img src={shortanswer} />
+                      <MdShortText size={15} />
                       Short answer
                     </li>
                     <li
@@ -96,7 +91,7 @@ const Addquestion = ({
                         })
                       }
                     >
-                      <img src={longanswer} /> Long answer
+                      <BsTextLeft size={15} /> Long answer
                     </li>
                     <li
                       onClick={() =>
@@ -106,7 +101,8 @@ const Addquestion = ({
                         })
                       }
                     >
-                      <img src={multiplechoice} /> Multiple choice
+                      <SlOptionsVertical width={15} height={15} /> Multiple
+                      choice
                     </li>
                   </ol>
                 </div>

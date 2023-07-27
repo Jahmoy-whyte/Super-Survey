@@ -32,7 +32,7 @@
 .title {
   display: flex;
   align-items: center;
-
+  word-break: break-all;
   border-radius: 6px;
   color: #5167f6;
   min-height: 70px;

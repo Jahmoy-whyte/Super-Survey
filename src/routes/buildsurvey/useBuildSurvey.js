@@ -28,10 +28,16 @@ const useBuildSurvey = () => {
     initialLoading: true,
     showLinkModel: false,
     linkButtonText: "Copy",
+    showDeleteSurveyModel: false,
   };
 
   const reducer = (state, action) => {
     switch (action.type) {
+      case "showDeleteSurveyModel":
+        return {
+          ...state,
+          showDeleteSurveyModel: action.payload,
+        };
       case "showLinkModel":
         return {
           ...state,
@@ -125,7 +131,6 @@ const useBuildSurvey = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [questions, setQuestions] = useState([]);
   // ======================================== questtions state =========================
-  console.log(questions);
 
   const copyLink = () => {
     dispatch({ type: ACTIONS.LINKBUTTONTEXT, payload: "Copied" });
@@ -143,13 +148,18 @@ const useBuildSurvey = () => {
       dispatch({ type: ACTIONS.INITIALLOADING, payload: true });
       try {
         const res = await getQuestions(surveyInfo.surveyId);
+
         setQuestions(
           res.map((row) => {
-            const choices = JSON.parse(row.choices);
-            return {
-              ...row,
-              choices: choices,
-            };
+            if (row.questionType === "multipleChoice") {
+              const choices = JSON.parse(row.choices);
+              return {
+                ...row,
+                choices: choices,
+              };
+            } else {
+              return row;
+            }
           })
         );
       } catch (error) {
@@ -254,7 +264,7 @@ const useBuildSurvey = () => {
     dispatch({ type: ACTIONS.INITIALLOADING, payload: true });
     try {
       await deleteSurvey(surveyInfo.surveyId);
-      nav("/home");
+      nav("/");
     } catch ({ error, message }) {
       console.log(error);
       toast.error(message);

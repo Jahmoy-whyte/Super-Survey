@@ -1,15 +1,8 @@
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
-  Navigate,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./routes/home/Home";
-import { useAuth0 } from "@auth0/auth0-react";
 import Surveys from "./routes/surveys/Surveys";
 import Createsurvey from "./routes/createsurvey/Createsurvey";
 import BuildSurvey from "./routes/buildsurvey/BuildSurvey";
@@ -19,6 +12,7 @@ import SurveyForm from "./routes/surveyform/SurveyForm";
 import SurveySubmitted from "./routes/surveysubmitted/SurveySubmitted";
 import SurveyResponces from "./routes/surveyresponces/SurveyResponces";
 import ProtectedRoutes from "./ProtectedRoutes";
+import LandingRoute from "./routes/landingroute/LandingRoute";
 const Routing = () => {
   const [surveyInfo, setSurveyInfo] = useState({
     surveyName: null,
@@ -26,6 +20,10 @@ const Routing = () => {
   });
 
   const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <LandingRoute />,
+    },
     {
       path: "/surveyform/:id",
       element: <SurveyForm />,
@@ -36,10 +34,14 @@ const Routing = () => {
     },
     {
       path: "/",
-      element: <ProtectedRoutes Route={Home} />,
+      element: (
+        <ProtectedRoutes>
+          <Home />
+        </ProtectedRoutes>
+      ),
       children: [
         {
-          path: "/",
+          path: "/home",
           element: <Surveys />,
         },
         {

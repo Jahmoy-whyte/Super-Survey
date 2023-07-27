@@ -17,12 +17,13 @@ export const checker = (state) => {
     bool = false;
     message = "There must be 2 or more options";
   } else if (state.questionType == "multipleChoice") {
-    state.choices.map((op, index) => {
-      if (op.text == "") {
+    for (let i = 0; i < state.choices.length; i++) {
+      if (state.choices[i].text == "") {
         bool = false;
-        message = `Enter text for option ${index + 1}`;
+        message = `Enter text for option ${i + 1}`;
+        break;
       }
-    });
+    }
   }
   return [bool, message];
 };

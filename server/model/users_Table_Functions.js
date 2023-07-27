@@ -1,13 +1,5 @@
-import mysql from "mysql2/promise";
-
-const conn = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  database: "surveydb",
-});
+import conn from "../helper/sqlconnection.js";
 /*
-
-
 const getUserAccount = async (userInfo) => {
   const [result] = await conn.execute(
     "SELECT * FROM users LEFT JOIN surveys ON users.user_id = surveys.user_id WHERE users.user_id =?",
@@ -15,7 +7,6 @@ const getUserAccount = async (userInfo) => {
   );
   return result;
 };
-
 */
 
 const getUserAccount = async (userInfo) => {
