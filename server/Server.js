@@ -7,7 +7,11 @@ import usersRoute from "./controller/usersRoute.js";
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://super-survey.onrender.com",
+  })
+);
 app.use("/questions", questionsRoute);
 app.use("/surveys", surveysRoute);
 app.use("/responces", responcesRoute);
@@ -37,4 +41,6 @@ axios
     console.error(error);
   });
 */
-app.listen(3000, () => console.log("server started on port 3000"));
+app.listen(process.env.PORT || 3000, () =>
+  console.log("server started on port 3000")
+);

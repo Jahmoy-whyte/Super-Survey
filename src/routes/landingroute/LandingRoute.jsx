@@ -4,17 +4,37 @@ import landingimg from "../../assets/images/landingimg.png";
 import landingimgsignup from "../../assets/images/landingimgsignup.png";
 import createsurveyimg from "../../assets/images/createsurvey.png";
 import createsurveyicon from "../../assets/images/createsurvey.svg";
-
 import linkimg from "../../assets/images/linkimg.png";
 import linkimgicon from "../../assets/images/linkimg.svg";
-
+import menu from "../../assets/images/menu.svg";
 import statsimg from "../../assets/images/statsimg.png";
-
+import { useAuth0 } from "@auth0/auth0-react";
 import statsimgicon from "../../assets/images/statsimg.svg";
 import StepsCards from "./components/stepscards/StepsCards";
+import { useNavigate } from "react-router-dom";
+import MobileMenu from "./components/mobilemenu/MobileMenu";
+import { useState } from "react";
 const LandingRoute = () => {
+  const nav = useNavigate();
+  const [show, setShow] = useState(false);
+  const { loginWithRedirect, isLoading, isAuthenticated } = useAuth0();
+
+  const loginOrSignUp = (screen) => {
+    if (isAuthenticated) {
+      nav("/home");
+      return;
+    }
+    loginWithRedirect({
+      authorizationParams: {
+        redirect_uri: "http://localhost:5173/home",
+        screen_hint: screen,
+      },
+    });
+  };
+
   return (
     <>
+      <MobileMenu setshow={setShow} show={show} loginOrSignUp={loginOrSignUp} />
       <div className={css.maincontainer}>
         <div className={css.headingandherodiv}>
           <header className={css.header}>
@@ -23,7 +43,28 @@ const LandingRoute = () => {
                 <img src={logo} />
                 <div>Super Survey</div>
               </div>
-              <button className={css.signupbtn}>Sign Up</button>
+              <img
+                src={menu}
+                className={css.menu}
+                loading="lazy"
+                onClick={() => setShow(true)}
+              />
+              <div className={css.btndiv}>
+                {!isLoading ? (
+                  <button
+                    className={css.loginbtn}
+                    onClick={() => loginOrSignUp("login")}
+                  >
+                    Login
+                  </button>
+                ) : null}
+                <button
+                  className={css.signupbtn}
+                  onClick={() => loginOrSignUp("signup")}
+                >
+                  SignUp
+                </button>
+              </div>
             </div>
           </header>
           <section className={css.herosection}>
@@ -37,7 +78,19 @@ const LandingRoute = () => {
                   Build, distribute, and analyze surveys effortlessly with
                   <br /> our user-friendly survey builder.
                 </p>
-                <button>Get Started</button>
+
+                <button
+                  onClick={() =>
+                    loginWithRedirect({
+                      authorizationParams: {
+                        redirect_uri: "http://localhost:5173/home",
+                        screen_hint: "signup",
+                      },
+                    })
+                  }
+                >
+                  Get Started
+                </button>
               </div>
               <div className={css.heroimgdiv}>
                 <img className={css.heroimg} src={landingimg} />
@@ -48,10 +101,14 @@ const LandingRoute = () => {
         <section className={css.section}>
           <div className={css.sectiondiv}>
             <div className={css.sectionimgdiv}>
-              <img className={css.sectionimg} src={landingimgsignup} />
+              <img
+                className={css.sectionimg}
+                loading="lazy"
+                src={landingimgsignup}
+              />
             </div>
             <div className={css.sectioncontentdiv}>
-              <h2>Signup</h2>
+              <h2>SignUp</h2>
               <p>its free all you need is an email address </p>
             </div>
           </div>
@@ -76,6 +133,7 @@ const LandingRoute = () => {
             />
           </div>
         </section>
+        <footer className={css.footer}></footer>
       </div>
     </>
   );

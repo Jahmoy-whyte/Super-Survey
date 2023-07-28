@@ -3,11 +3,16 @@ import useSurveyForm from "./useSurveyForm";
 import QuestionsLayout from "./components/questionslayout/QuestionsLayout";
 import Button from "../../components/button/Button";
 import { surveyFormActions } from "./helper/surveyFormActions";
-import Loading from "../../components/loading/Loading";
+import { ProgressBar } from "react-loader-spinner";
 const SurveyForm = () => {
   const [state, dispatch, db_SubmitForm] = useSurveyForm();
 
-  if (state.initialLoading) return <Loading />;
+  if (state.initialLoading)
+    return (
+      <div className="loading-container">
+        <ProgressBar barColor={"white"} borderColor={"white"} />
+      </div>
+    );
   return (
     <>
       <div className={css.maincontainer}>

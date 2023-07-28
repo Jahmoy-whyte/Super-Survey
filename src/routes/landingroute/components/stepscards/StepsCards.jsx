@@ -5,11 +5,11 @@ const StepsCards = ({ icon, text, img }) => {
     <>
       <div className={css.cardcontainer}>
         <div className={css.headingdiv}>
-          <img src={icon} />
+          <img loading="lazy" src={icon} />
           <p>{text}</p>
         </div>
         <div className={css.imgdiv}>
-          <img src={img} />
+          <img loading="lazy" src={img} />
         </div>
       </div>
     </>

@@ -3,10 +3,7 @@ import { API_BASE_URL } from "./helper/baseUrl";
 
 export const getQuestions = async (surveyId) => {
   const response = await fetch(`${API_BASE_URL}questions/${surveyId}`);
-  return await checkResponceReturn(
-    response,
-    "Error getting questions please try again"
-  );
+  return await checkResponceReturn(response);
 };
 
 export const insertQuestions = async (surveyQuestion) => {
@@ -17,10 +14,7 @@ export const insertQuestions = async (surveyQuestion) => {
     },
     body: JSON.stringify(surveyQuestion),
   });
-  return await checkResponceReturn(
-    response,
-    "Error insert Question please try again"
-  );
+  return await checkResponceReturn(response);
 };
 
 export const updateQuestions = async (id, surveyQuestion) => {
@@ -31,12 +25,12 @@ export const updateQuestions = async (id, surveyQuestion) => {
     },
     body: JSON.stringify(surveyQuestion),
   });
-  await checkResponce(response, "Error updating question please try again");
+  await checkResponce(response);
 };
 
 export const deleteQuestions = async (id) => {
   const response = await fetch(`${API_BASE_URL}questions/${id}`, {
     method: "DELETE",
   });
-  await checkResponce(response, "Error deleting question please try again");
+  await checkResponce(response);
 };

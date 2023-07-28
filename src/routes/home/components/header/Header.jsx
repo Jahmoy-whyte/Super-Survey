@@ -15,7 +15,7 @@ const Header = () => {
       ) : null}
 
       <header className={css.heading_css}>
-        <div className={css.leftdiv} onClick={() => nav("/")}>
+        <div className={css.leftdiv} onClick={() => nav("/home")}>
           <img src={logo} />
           <h1>Super Survey</h1>
         </div>

@@ -1,7 +1,7 @@
 import css from "./CSS.module.css";
 import closelarge from "../../../../assets/images/close2.svg";
 import { ACTIONS } from "../../helper/reducerActions";
-import { API_BASE_URL } from "../../../../databaseFunctions/helper/baseUrl";
+
 const CopyLinkModel = ({ state, dispatch, surveyInfo, copyLink }) => {
   return (
     <>
@@ -26,7 +26,8 @@ const CopyLinkModel = ({ state, dispatch, surveyInfo, copyLink }) => {
 
               <div className={css.linkdiv}>
                 <p>
-                  {API_BASE_URL}/surveyform/{surveyInfo.surveyId}
+                  https://super-survey.onrender.com/surveyform/
+                  {surveyInfo.surveyId}
                 </p>
                 <button onClick={() => copyLink()}>
                   {state.linkButtonText}

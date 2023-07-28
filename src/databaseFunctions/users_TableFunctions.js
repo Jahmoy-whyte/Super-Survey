@@ -10,8 +10,5 @@ export const getUserInfo = async (userInfo) => {
     body: JSON.stringify(userInfo),
   });
 
-  return await checkResponceReturn(
-    response,
-    "Error getting userinfo please try again"
-  );
+  return await checkResponceReturn(response);
 };

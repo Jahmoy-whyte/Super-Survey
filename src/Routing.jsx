@@ -1,25 +1,39 @@
 import { ToastContainer } from "react-toastify";
-
 import "react-toastify/dist/ReactToastify.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./routes/home/Home";
-import Surveys from "./routes/surveys/Surveys";
-import Createsurvey from "./routes/createsurvey/Createsurvey";
-import BuildSurvey from "./routes/buildsurvey/BuildSurvey";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import { SurveyInfoContext } from "./context/context";
-import { useState } from "react";
-import SurveyForm from "./routes/surveyform/SurveyForm";
-import SurveySubmitted from "./routes/surveysubmitted/SurveySubmitted";
-import SurveyResponces from "./routes/surveyresponces/SurveyResponces";
+import { useState, lazy, Suspense } from "react";
+
+import Createsurvey from "./routes/createsurvey/Createsurvey";
+
 import ProtectedRoutes from "./ProtectedRoutes";
 import LandingRoute from "./routes/landingroute/LandingRoute";
+import { ProgressBar } from "react-loader-spinner";
+//import Home from "./routes/home/Home";
+//import BuildSurvey from "./routes/buildsurvey/BuildSurvey";
+//import SurveyResponces from "./routes/surveyresponces/SurveyResponces";
+//import Surveys from "./routes/surveys/Surveys";
+//import SurveyForm from "./routes/surveyform/SurveyForm";
+//import SurveySubmitted from "./routes/surveysubmitted/SurveySubmitted";
+
+const SurveySubmitted = lazy(() =>
+  import("./routes/surveysubmitted/SurveySubmitted")
+);
+const SurveyForm = lazy(() => import("./routes/surveyform/SurveyForm"));
+const Home = lazy(() => import("./routes/home/Home"));
+const BuildSurvey = lazy(() => import("./routes/buildsurvey/BuildSurvey"));
+const Surveys = lazy(() => import("./routes/surveys/Surveys"));
+const SurveyResponces = lazy(() =>
+  import("./routes/surveyresponces/SurveyResponces")
+);
+
 const Routing = () => {
   const [surveyInfo, setSurveyInfo] = useState({
     surveyName: null,
     surveyId: null,
   });
 
-  const router = createBrowserRouter([
+  const router = createHashRouter([
     {
       path: "/",
       element: <LandingRoute />,
@@ -66,10 +80,18 @@ const Routing = () => {
 
   return (
     <>
-      <SurveyInfoContext.Provider value={[surveyInfo, setSurveyInfo]}>
-        <RouterProvider router={router} />
-      </SurveyInfoContext.Provider>
-      <ToastContainer hideProgressBar />
+      <Suspense
+        fallback={
+          <div className="loading-container">
+            <ProgressBar barColor={"white"} borderColor={"white"} />
+          </div>
+        }
+      >
+        <SurveyInfoContext.Provider value={[surveyInfo, setSurveyInfo]}>
+          <RouterProvider router={router} />
+        </SurveyInfoContext.Provider>
+        <ToastContainer hideProgressBar />
+      </Suspense>
     </>
   );
 };

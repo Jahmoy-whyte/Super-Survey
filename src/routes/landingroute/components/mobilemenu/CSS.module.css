@@ -1,0 +1,63 @@
+.menubackdrop {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  background-color: rgba(58, 58, 58, 0.13);
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  align-items: flex-end;
+  animation: backani 0.3s;
+}
+@keyframes backani {
+  from {
+    opacity: 0.5;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.menucontainer {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  flex: 1;
+  max-width: 200px;
+  width: 100%;
+  padding: 10px;
+  gap: 10px;
+  animation: meniani 0.3s;
+}
+@keyframes meniani {
+  from {
+    transform: translate(80px, 0px);
+  }
+
+  to {
+    transform: translate(0px, 0px);
+  }
+}
+.closeheading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.closeheading > img {
+  width: 15px;
+  height: 15px;
+}
+
+.btn {
+  min-height: 35px;
+  border: none;
+  font-size: 1rem;
+  text-align: left;
+  border-bottom: 0.5px solid #b3b3b3;
+  background-color: transparent;
+}

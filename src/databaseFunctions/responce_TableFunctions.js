@@ -10,12 +10,9 @@ export const submitForm = async (formData) => {
     body: JSON.stringify(formData),
   });
 
-  await checkResponce(response, "Error submiting form please try again");
+  await checkResponce(response);
 };
 export const getResponces = async (questionId) => {
   const response = await fetch(`${API_BASE_URL}responces/${questionId}`);
-  return await checkResponceReturn(
-    response,
-    "Error getting responces please try again"
-  );
+  return await checkResponceReturn(response);
 };

@@ -1,6 +1,6 @@
 import { useState, useReducer, useContext, useEffect } from "react";
 import { deleteSurvey } from "../../databaseFunctions/surveys_TableFunctions";
-import { API_BASE_URL } from "../../databaseFunctions/helper/baseUrl";
+
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { ACTIONS } from "./helper/reducerActions";
@@ -135,7 +135,7 @@ const useBuildSurvey = () => {
   const copyLink = () => {
     dispatch({ type: ACTIONS.LINKBUTTONTEXT, payload: "Copied" });
     navigator.clipboard.writeText(
-      `${"http://localhost:5173/"}surveyform/${surveyInfo.surveyId}`
+      `${"https://super-survey.onrender.com/"}surveyform/${surveyInfo.surveyId}`
     );
     setTimeout(() => {
       dispatch({ type: ACTIONS.LINKBUTTONTEXT, payload: "Copy" });
