@@ -26,8 +26,9 @@ const LinkModel = ({ state, dispatch, surveyInfo, copyLink }) => {
 
               <div className={css.linkdiv}>
                 <p>
-                  https://super-survey.onrender.com/surveyform/
-                  {surveyInfo.surveyId}
+                  {window.location.origin +
+                    "/#/surveyform/" +
+                    surveyInfo.surveyId}
                 </p>
                 <button onClick={() => copyLink()}>
                   {state.linkButtonText}

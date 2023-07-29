@@ -135,7 +135,7 @@ const useBuildSurvey = () => {
   const copyLink = () => {
     dispatch({ type: ACTIONS.LINKBUTTONTEXT, payload: "Copied" });
     navigator.clipboard.writeText(
-      `${"https://super-survey.onrender.com/"}surveyform/${surveyInfo.surveyId}`
+      `${window.location.origin}/#/surveyform/${surveyInfo.surveyId}`
     );
     setTimeout(() => {
       dispatch({ type: ACTIONS.LINKBUTTONTEXT, payload: "Copy" });
