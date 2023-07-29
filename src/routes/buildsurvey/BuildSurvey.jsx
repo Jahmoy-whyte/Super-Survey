@@ -4,7 +4,7 @@ import Addquestion from "./components/addquestion/Addquestion";
 import useBuildSurvey from "./useBuildSurvey";
 import QuestionsLayout from "./components/questionslayout/QuestionsLayout";
 import Loading from "../../components/loading/Loading";
-import CopyLinkModel from "./components/copylinkmodel/copylinkmodel";
+import LinkModel from "./components/Linkmodel/LinkModel";
 import DeleteSurveyModel from "./components/deletesurveymodel/DeleteSurveyModel";
 const BuildSurvey = () => {
   const [
@@ -29,7 +29,7 @@ const BuildSurvey = () => {
         dispatch={dispatch}
         state={state}
       />
-      <CopyLinkModel
+      <LinkModel
         state={state}
         dispatch={dispatch}
         surveyInfo={surveyInfo}

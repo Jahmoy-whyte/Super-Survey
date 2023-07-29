@@ -2,7 +2,7 @@ import css from "./CSS.module.css";
 import closelarge from "../../../../assets/images/close2.svg";
 import { ACTIONS } from "../../helper/reducerActions";
 
-const CopyLinkModel = ({ state, dispatch, surveyInfo, copyLink }) => {
+const LinkModel = ({ state, dispatch, surveyInfo, copyLink }) => {
   return (
     <>
       {state.showLinkModel ? (
@@ -41,4 +41,4 @@ const CopyLinkModel = ({ state, dispatch, surveyInfo, copyLink }) => {
   );
 };
 
-export default CopyLinkModel;
+export default LinkModel;
