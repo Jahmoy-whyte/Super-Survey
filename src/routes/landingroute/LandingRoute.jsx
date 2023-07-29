@@ -14,6 +14,7 @@ import StepsCards from "./components/stepscards/StepsCards";
 import { useNavigate } from "react-router-dom";
 import MobileMenu from "./components/mobilemenu/MobileMenu";
 import { useState } from "react";
+
 const LandingRoute = () => {
   const nav = useNavigate();
   const [show, setShow] = useState(false);
@@ -26,7 +27,7 @@ const LandingRoute = () => {
     }
     loginWithRedirect({
       authorizationParams: {
-        redirect_uri: "http://localhost:5173/home",
+        redirect_uri: `${window.location.origin}/home`,
         screen_hint: screen,
       },
     });
@@ -79,16 +80,7 @@ const LandingRoute = () => {
                   <br /> our user-friendly survey builder.
                 </p>
 
-                <button
-                  onClick={() =>
-                    loginWithRedirect({
-                      authorizationParams: {
-                        redirect_uri: "http://localhost:5173/home",
-                        screen_hint: "signup",
-                      },
-                    })
-                  }
-                >
+                <button onClick={() => loginOrSignUp("signup")}>
                   Get Started
                 </button>
               </div>
