@@ -1,5 +1,5 @@
 import css from "./CSS.module.css";
-import smallClose from "../../../../assets/images/closeSmall.svg";
+import smallClose from "../../../../assets/images/closesmall.svg";
 import { ACTIONS } from "../../helper/reducerActions";
 import { memo } from "react";
 const QuestionTypeHander = ({ state, dispatch }) => {
