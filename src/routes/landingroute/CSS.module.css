@@ -68,9 +68,6 @@
   transform: scale(0.95);
 }
 
-.loginbtn:hover {
-}
-
 .signupbtn:hover {
   background-color: #344ef6;
 }
@@ -129,7 +126,7 @@
   font-weight: bold;
   height: 40px;
   max-width: 150px;
-  margin-top: 10px;
+  margin-top: 20px;
   cursor: pointer;
 }
 .herotextdiv > button:active {
@@ -141,7 +138,7 @@
 
 .heroimgdiv {
   max-width: 445px;
-  max-height: 277px;
+  max-height: 286px;
   flex: 1;
 }
 .heroimg {
@@ -173,7 +170,7 @@
 
 .sectionimgdiv {
   max-width: 445px;
-  max-height: 277px;
+  max-height: 286px;
   flex: 1;
 }
 .sectionimg {

@@ -264,7 +264,7 @@ const useBuildSurvey = () => {
     dispatch({ type: ACTIONS.INITIALLOADING, payload: true });
     try {
       await deleteSurvey(surveyInfo.surveyId);
-      nav("/");
+      nav("/home");
     } catch ({ error, message }) {
       console.log(error);
       toast.error(message);

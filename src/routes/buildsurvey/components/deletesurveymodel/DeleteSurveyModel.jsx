@@ -1,7 +1,7 @@
 import css from "./CSS.module.css";
 import closelarge from "../../../../assets/images/close2.svg";
 import { ACTIONS } from "../../helper/reducerActions";
-import { API_BASE_URL } from "../../../../databaseFunctions/helper/baseUrl";
+
 const DeleteSurveyModel = ({ state, dispatch, db_DeleteSurvey }) => {
   return (
     <>
