@@ -4,7 +4,7 @@ import Addquestion from "./components/addquestion/Addquestion";
 import useBuildSurvey from "./useBuildSurvey";
 import QuestionsLayout from "./components/questionslayout/QuestionsLayout";
 import Loading from "../../components/loading/Loading";
-import LinkModel from "./components/Linkmodel/LinkModel";
+import LinkModel from "./components/copylink/LinkModel";
 import DeleteSurveyModel from "./components/deletesurveymodel/DeleteSurveyModel";
 const BuildSurvey = () => {
   const [
