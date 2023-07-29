@@ -27,7 +27,7 @@ const LandingRoute = () => {
     }
     loginWithRedirect({
       authorizationParams: {
-        redirect_uri: `${window.location.origin}/home`,
+        redirect_uri: `${window.location.origin}/#/home`,
         screen_hint: screen,
       },
     });
