@@ -4,13 +4,19 @@ import QuestionsLayout from "./components/questionslayout/QuestionsLayout";
 import Button from "../../components/button/Button";
 import { surveyFormActions } from "./helper/surveyFormActions";
 import { ProgressBar } from "react-loader-spinner";
+import Loading from "../../components/loading/Loading";
 const SurveyForm = () => {
   const [state, dispatch, db_SubmitForm] = useSurveyForm();
 
   if (state.initialLoading)
     return (
       <div className="loading-container">
-        <ProgressBar barColor={"white"} borderColor={"white"} />
+        <Loading
+          text="Node sever hosted on the free tier on render.com, free instance will
+          spin down with inactivity. so it may take seconds."
+          primaryColors={"white"}
+          secondary={"white"}
+        />
       </div>
     );
   return (

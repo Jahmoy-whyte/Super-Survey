@@ -109,3 +109,22 @@
   width: 200px;
   height: 200px;
 }
+.Loadingstyle {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+}
+.errordiv {
+  display: flex;
+
+  flex: 1;
+  color: white;
+  align-items: center;
+  justify-content: center;
+}
+.errordiv > p {
+  text-align: center;
+}

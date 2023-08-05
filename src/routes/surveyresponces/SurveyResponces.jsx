@@ -3,6 +3,7 @@ import Button from "../../components/button/Button";
 import useSurveyResponces from "./useSurveyResponces";
 import ResponeLayout from "./components/responelayout/ResponeLayout";
 import { useNavigate } from "react-router-dom";
+import { MdOutlineArrowBackIosNew } from "react-icons/md";
 const SurveyResponces = () => {
   const nav = useNavigate();
   const [state, dispatch, surveyInfo, dbGetResponces] = useSurveyResponces();
@@ -11,7 +12,10 @@ const SurveyResponces = () => {
       <div className={css.maincontainer}>
         <div className={css.container}>
           <div className={css.toolbar}>
-            <Button text="Back" width={120} func={() => nav(-1)} />
+            <button className={css.toobarbtn2} onClick={() => nav(-1)}>
+              <MdOutlineArrowBackIosNew />
+              <p>Back</p>
+            </button>
           </div>
           <div className={css.basediv}>
             <div className={css.title}>

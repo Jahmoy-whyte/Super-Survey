@@ -5,16 +5,24 @@ import { useNavigate } from "react-router-dom";
 import useSurvey from "./useSurvey";
 import Surveycards from "./components/surveycards/Surveycards";
 import Loading from "../../components/loading/Loading";
+
 const Surveys = () => {
   const nav = useNavigate();
   const [surveyData, fn_navigate] = useSurvey();
 
   if (surveyData.isloading) {
-    return <Loading secondary={"white"} primaryColors={"white"} />;
+    return (
+      <Loading
+        text="Node sever hosted on the free tier on render.com, free instance will
+      spin down with inactivity. so it may take a minute to connect to server. Please wait"
+        primaryColors={"white"}
+        secondary={"white"}
+      />
+    );
   } else if (surveyData.error) {
     return (
-      <div>
-        <p>error </p>
+      <div className={css.errordiv}>
+        <p>Error occurred please refresh and tryagain </p>
       </div>
     );
   }

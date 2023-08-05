@@ -93,11 +93,7 @@ const LandingRoute = () => {
         <section className={css.section}>
           <div className={css.sectiondiv}>
             <div className={css.sectionimgdiv}>
-              <img
-                className={css.sectionimg}
-                loading="lazy"
-                src={landingimgsignup}
-              />
+              <img className={css.sectionimg} src={landingimgsignup} />
             </div>
             <div className={css.sectioncontentdiv}>
               <h2>SignUp</h2>

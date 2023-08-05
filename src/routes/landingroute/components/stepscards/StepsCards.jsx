@@ -9,7 +9,7 @@ const StepsCards = ({ icon, text, img }) => {
           <p>{text}</p>
         </div>
         <div className={css.imgdiv}>
-          <img loading="lazy" src={img} />
+          <img src={img} />
         </div>
       </div>
     </>
